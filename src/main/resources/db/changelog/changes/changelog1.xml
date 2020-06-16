@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet  id="1"  author="humberto">
+        <createTable  tableName="user_">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column  name="username"  type="varchar(50)"/>
+            <column  name="email"  type="varchar(50)"/>
+            <column  name="state"  type="varchar(50)"/>
+            <column  name="password"  type="varchar(50)"/>
+            <column  name="mobile"  type="varchar(50)"/>
+            <column  name="status"  type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet  id="2"  author="humberto">
+        <createTable  tableName="note">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column  name="date"  type="datetime"/>
+            <column  name="name"  type="varchar(50)"/>
+            <column  name="description"  type="varchar(2048)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
