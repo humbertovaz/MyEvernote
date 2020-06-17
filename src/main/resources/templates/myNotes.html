@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>My Notes</title>
 </head>
 <body>
-
+    <h1>My notes</h1>
+    <hr>
+    <form autocomplete="off" action="#" th:action="@{/newNote}" th:object="${noteDTO}" method="post">
+        <div class="container">
+            <h2>New Note</h2>
+            <p>Please fill in this form to create a new note.</p>
+            <label for="name"><b>Title</b></label>
+            <p></p>
+            <input type="name" id="name" placeholder="Enter the title of the Note" name="name" required>
+            <p></p>
+            <textarea  id="description" placeholder="Enter the title of the Note" name="description" rows="10" columns="50"></textarea>
+            <hr>
+            <button type="submit" class="registerbtn">Create</button>
+        </div>
 </body>
 </html>

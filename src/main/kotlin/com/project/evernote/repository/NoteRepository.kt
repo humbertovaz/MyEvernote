@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface NoteRepository : JpaRepository<Note?, Long?> {
-    fun findByName(name: String): Note?
+    fun findByName(name: String): Set<Note?>
 
 }
