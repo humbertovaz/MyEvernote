@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.servlet.ModelAndView
 import java.util.*
-import javax.print.attribute.standard.DateTimeAtCreation
 import javax.validation.Valid
 
 @Controller
 @Lazy
-class NoteController(var userService : UserServiceImpl, val repository: NoteRepository){
+class NoteController(var userService : UserServiceImpl, val noteRepository: NoteRepository){
 
     @PostMapping("/newNote")
     fun newNote(@ModelAttribute("noteDTO") @Valid noteDTO: NoteDTO, @AuthenticationPrincipal userDetails : UserDetails) : ModelAndView {
@@ -27,7 +26,7 @@ class NoteController(var userService : UserServiceImpl, val repository: NoteRepo
         if(noteDTO.name != null && noteDTO.description != null && user != null){
             val users: MutableSet<User> = HashSet()
             users.add(user)
-            repository.save(Note(null, DateTimeAtCreation(Date()),noteDTO.name,noteDTO.description,users))
+            noteRepository.save(Note(null, Date(),noteDTO.name,noteDTO.description,users))
         }
         modelAndView.viewName = "myNotes"
         return modelAndView

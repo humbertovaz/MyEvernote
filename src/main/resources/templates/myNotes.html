@@ -6,6 +6,11 @@
 </head>
 <body>
     <h1>My notes</h1>
+    <tr th:each="note : ${notes}">
+        <td th:text="${note.id}">1</td>
+        <td><a href="#" th:text="${note.name}">Title ...</a></td>
+        <td th:text="${note.description}">Text ...</td>
+    </tr>
     <hr>
     <form autocomplete="off" action="#" th:action="@{/newNote}" th:object="${noteDTO}" method="post">
         <div class="container">

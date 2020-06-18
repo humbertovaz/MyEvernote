@@ -13,12 +13,13 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
+import java.util.HashSet
 import javax.validation.Valid
 
 
 @Controller
 @Lazy
-class AuthenticationController(var userService : UserServiceImpl) {
+class AuthenticationController(var userService : UserServiceImpl, val noteRepository: NoteRepository) {
 
 
     @GetMapping("/error")
@@ -56,9 +57,15 @@ class AuthenticationController(var userService : UserServiceImpl) {
     }
 
     @GetMapping("/myNotes")
-    fun mynotes (model: Model): ModelAndView {
+    fun mynotes (model: Model, @AuthenticationPrincipal userDetails : UserDetails): ModelAndView {
         val modelAndView = ModelAndView()
         modelAndView.viewName = "myNotes"
+        val user = userService.findByEmail(userDetails.username)
+        if(user != null){
+            val users: MutableSet<User> = HashSet()
+            users.add(user)
+            modelAndView.addObject("notes", noteRepository.findByUsersIn(users))
+        }
         return modelAndView
     }
 
