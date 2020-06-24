@@ -3,26 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>My Notes</title>
-</head>
-<body>
-    <h1>My notes</h1>
-    <tr th:each="note : ${notes}">
-        <td th:text="${note.id}">1</td>
-        <td><a href="#" th:text="${note.name}">Title ...</a></td>
-        <td th:text="${note.description}">Text ...</td>
-    </tr>
-    <hr>
-    <form autocomplete="off" action="#" th:action="@{/newNote}" th:object="${noteDTO}" method="post">
-        <div class="container">
-            <h2>New Note</h2>
-            <p>Please fill in this form to create a new note.</p>
-            <label for="name"><b>Title</b></label>
-            <p></p>
-            <input type="name" id="name" placeholder="Enter the title of the Note" name="name" required>
-            <p></p>
-            <textarea  id="description" placeholder="Enter the title of the Note" name="description" rows="10" columns="50"></textarea>
-            <hr>
-            <button type="submit" class="registerbtn">Create</button>
-        </div>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></head>
+<body class="gray-bg">
+<div class="container">
+    <div class="col-md-12 text-center">
+        <h1>My notes</h1>
+        <a href="/home" class="btn btn-primary">Home</a>
+        <a href="/logout" class="btn btn-primary">Logout</a>
+        <form autocomplete="off" action="#" th:action="@{/newNote}" th:object="${noteDTO}" method="post">
+            <div class="card" style="width: 50rem; position: center;">
+                <h2>New Note</h2>
+                <p>Please fill in this form to create a new note.</p>
+                <label for="name"><b>Title</b></label>
+                <p></p>
+                <input type="name" id="name" placeholder="Enter the title of the Note" name="name" required>
+                <p></p>
+                <textarea  id="description" placeholder="Write your note here" name="description" rows="10" columns="50"></textarea>
+                <hr>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+
+            <div class="card-body" th:each="note : ${notes}">
+                <div class="card" style="width: 18rem;">
+                    <h5 class="card-title" th:text="${note.name}">Card title</h5>
+                    <p class="card-title" th:text="${note.date}"></p>
+                    <p class="card-text" th:text="${note.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#"  th:href="@{myNotes/delete/} + ${note.id}" th:method="get" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+</div>
 </body>
 </html>

@@ -23,4 +23,9 @@ class NoteService(val noteRepository: NoteRepository){
         users.add(user)
         return noteRepository.findByUsersIn(users) as MutableSet<Note?>
     }
+
+    fun delete(id: Long) {
+        var note = noteRepository.findById(id).get()
+        return noteRepository.delete(note)
+    }
 }

@@ -3,46 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous" />
 </head>
-<body>
+<body class="gray-bg">
+<div class="container">
+    <div class="col-md-12 text-center">
+    <h1>Login</h1>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Login Form -->
+            <form autocomplete="off" action="#" th:action="@{/performLogin}" th:object="${account}" method="POST">
+                <input type="email" id="login" name="email" placeholder="email">
+                <p></p>
+                <input type="password" id="password" name="password" placeholder="password">
+                <p></p>
+                <input type="submit" class="fadeIn fourth" value="Submit">
+            </form>
+            <a href="/register">Register New User</a>
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
 
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Tabs Titles -->
 
-        <!-- Icon -->
-        <div class="fadeIn first">
-            <img src="#" id="icon" alt="User Icon" />
         </div>
-
-        <!-- Login Form -->
-        <form autocomplete="off" action="#" th:action="@{/performLogin}" th:object="${account}" method="POST">
-            <input type="email" id="login" name="email" placeholder="email">
-            <input type="password" id="password" name="password" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Submit">
-        </form>
-        <a href="/register">Register New User</a>
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
-        </div>
-
-
-<!--        <form method="POST" action="/login" class="form-signin">-->
-<!--            <h2 class="form-heading">Log in</h2>-->
-<!--            <div>-->
-<!--                <input name="username" type="text" class="form-control" placeholder="Username" autofocus="true" />-->
-<!--                <input name="password" type="password" class="form-control" placeholder="Password" />-->
-<!--                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--        <a href="/register">Register New User</a>-->
-<!--        &lt;!&ndash; Remind Passowrd &ndash;&gt;-->
-<!--        <div id="formFooter">-->
-<!--            <a class="underlineHover" href="#">Forgot Password?</a>-->
-<!--        </div>-->
-
-
+    </div>
+    </div>
 </div>
 </body>
 </html>
