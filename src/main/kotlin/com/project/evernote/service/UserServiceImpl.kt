@@ -1,5 +1,7 @@
 package com.project.evernote.service
 
+import com.project.evernote.dataclass.NoteDTO
+import com.project.evernote.model.Note
 import com.project.evernote.model.User
 
 import com.project.evernote.repository.UserRepository
@@ -9,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 
 @Service("userService")
@@ -34,6 +37,8 @@ class UserServiceImpl (val encoder: PasswordEncoder,val userRepository: UserRepo
         return org.springframework.security.core.userdetails.User("admin@a",
                 "$2a$10\$vs7veyVUaqeGyVlxXpp94O7BcmzcF2HGUmH2va6XDVCj2mK8uFzRi", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"))
     }
+
+
 
 
 }

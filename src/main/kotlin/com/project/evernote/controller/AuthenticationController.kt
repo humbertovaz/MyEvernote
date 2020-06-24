@@ -5,6 +5,7 @@ import com.project.evernote.dataclass.NoteDTO
 import com.project.evernote.model.Note
 import com.project.evernote.model.User
 import com.project.evernote.repository.NoteRepository
+import com.project.evernote.service.NoteService
 import com.project.evernote.service.UserServiceImpl
 import org.springframework.context.annotation.Lazy
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -19,7 +20,7 @@ import javax.validation.Valid
 
 @Controller
 @Lazy
-class AuthenticationController(var userService : UserServiceImpl, val noteRepository: NoteRepository) {
+class AuthenticationController(var userService : UserServiceImpl) {
 
 
     @GetMapping("/error")
@@ -56,18 +57,6 @@ class AuthenticationController(var userService : UserServiceImpl, val noteReposi
         return modelAndView
     }
 
-    @GetMapping("/myNotes")
-    fun mynotes (model: Model, @AuthenticationPrincipal userDetails : UserDetails): ModelAndView {
-        val modelAndView = ModelAndView()
-        modelAndView.viewName = "myNotes"
-        val user = userService.findByEmail(userDetails.username)
-        if(user != null){
-            val users: MutableSet<User> = HashSet()
-            users.add(user)
-            modelAndView.addObject("notes", noteRepository.findByUsersIn(users))
-        }
-        return modelAndView
-    }
 
 
     @RequestMapping(value = ["/login"], method = [RequestMethod.GET])

@@ -30,5 +30,5 @@ class RestController(val noteRepository: NoteRepository) {
             }
         }
         return notesUI
-        }
+    }
 }
