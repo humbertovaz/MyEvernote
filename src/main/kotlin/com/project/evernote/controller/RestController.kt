@@ -10,7 +10,7 @@ import kotlin.collections.ArrayList
 
 
 @RestController
-class RestController(val repository: NoteRepository) {
+class RestController(val noteRepository: NoteRepository) {
 
     @GetMapping("/")
     fun home (model: Model): ModelAndView {
@@ -22,7 +22,7 @@ class RestController(val repository: NoteRepository) {
 
     @GetMapping("/getNotes")
     fun getNotes() : List<NoteDTO>{
-        val notes = repository.findAll()
+        val notes = noteRepository.findAll()
         val notesUI: MutableList<NoteDTO> = ArrayList<NoteDTO>()
         for (note in notes) {
             if (note != null) {
@@ -30,5 +30,5 @@ class RestController(val repository: NoteRepository) {
             }
         }
         return notesUI
-        }
+    }
 }

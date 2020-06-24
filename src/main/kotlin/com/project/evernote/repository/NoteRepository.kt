@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface NoteRepository : JpaRepository<Note?, Long?> {
     fun findByName(name: String): Set<Note?>
+    fun findByUsersIn(users : Set<User?>) : Set<Note?>
 
 }

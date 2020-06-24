@@ -5,6 +5,7 @@ import com.project.evernote.dataclass.NoteDTO
 import com.project.evernote.model.Note
 import com.project.evernote.model.User
 import com.project.evernote.repository.NoteRepository
+import com.project.evernote.service.NoteService
 import com.project.evernote.service.UserServiceImpl
 import org.springframework.context.annotation.Lazy
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
+import java.util.HashSet
 import javax.validation.Valid
 
 
@@ -55,12 +57,6 @@ class AuthenticationController(var userService : UserServiceImpl) {
         return modelAndView
     }
 
-    @GetMapping("/myNotes")
-    fun mynotes (model: Model): ModelAndView {
-        val modelAndView = ModelAndView()
-        modelAndView.viewName = "myNotes"
-        return modelAndView
-    }
 
 
     @RequestMapping(value = ["/login"], method = [RequestMethod.GET])
