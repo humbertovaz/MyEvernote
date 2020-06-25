@@ -13,6 +13,7 @@ class Note(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long? = null,
         val date: Date? = null,
+        @Column(nullable = false, unique = true)
         val name : String? = null,
         var description: String? = null,
         @ManyToMany
