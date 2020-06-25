@@ -35,7 +35,7 @@
     <div class="container">
         <div class="card-body" th:each="note : ${notes}">
             <div class="card" style="width: 18rem;">
-                <h5><textarea class="card-title" th:text="${note.name}">Note title</textarea></h5>
+                <h5 class="card-title" th:text="${note.name}">Note title</h5>
                 <p class="card-title" th:text="${note.date}"></p>
                 <textarea th:id="${note.id}" class="card-text" th:text="${note.description}"></textarea>
                 <a href="#"  th:href="@{myNotes/delete/} + ${note.id}" th:method="get" class="btn btn-primary">Delete</a>
