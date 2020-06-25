@@ -39,7 +39,7 @@ class NoteController(var userService : UserServiceImpl,val noteService: NoteServ
     }
 
 
-    @GetMapping("/myNotes")
+    @RequestMapping("/myNotes")
     fun mynotes (model: Model, @AuthenticationPrincipal userDetails : UserDetails): ModelAndView {
         val modelAndView = ModelAndView()
         modelAndView.viewName = "myNotes"
