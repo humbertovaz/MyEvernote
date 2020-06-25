@@ -3,26 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>My Notes</title>
-</head>
-<body>
-    <h1>My notes</h1>
-    <tr th:each="note : ${notes}">
-        <td th:text="${note.id}">1</td>
-        <td><a href="#" th:text="${note.name}">Title ...</a></td>
-        <td th:text="${note.description}">Text ...</td>
-    </tr>
-    <hr>
-    <form autocomplete="off" action="#" th:action="@{/newNote}" th:object="${noteDTO}" method="post">
-        <div class="container">
-            <h2>New Note</h2>
-            <p>Please fill in this form to create a new note.</p>
-            <label for="name"><b>Title</b></label>
-            <p></p>
-            <input type="name" id="name" placeholder="Enter the title of the Note" name="name" required>
-            <p></p>
-            <textarea  id="description" placeholder="Enter the title of the Note" name="description" rows="10" columns="50"></textarea>
-            <hr>
-            <button type="submit" class="registerbtn">Create</button>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></head>
+    <!--<script type="text/javascript" th:src="@{/js/src/requests.js}" /> -->
+<body class="gray-bg">
+<div class="container">
+    <div class="col-md-12 text-center" position="center">
+        <h1>My notes</h1>
+        <a href="/home" class="btn btn-primary">Home</a>
+        <a href="/logout" class="btn btn-primary">Logout</a>
+        <div class="container" style="width: 20rem; height: 5rem;"></div>
+        <form autocomplete="off" action="#" th:action="@{/newNote}" th:object="${noteDTO}" method="post">
+            <div class="card" style="position: center;">
+                <h2>New Note</h2>
+                <p>Please fill in this form to create a new note.</p>
+                <label for="name"><b>Title</b></label>
+                <p></p>
+                <input type="name" id="name" placeholder="Enter the title of the Note" name="name" required>
+                <p></p>
+                <textarea  id="description" placeholder="Write your note here" name="description" rows="10" columns="50"></textarea>
+                <hr>
+                <!--<div class="container"> -->
+                    <button type="submit" class="btn btn-primary" width="5rem">Create</button>
+                <!--</div> -->
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="card-body" th:each="note : ${notes}">
+            <div class="card" style="width: 18rem;">
+                <h5><textarea class="card-title" th:text="${note.name}">Note title</textarea></h5>
+                <p class="card-title" th:text="${note.date}"></p>
+                <textarea id="${note.id}" class="card-text" th:text="${note.description}"></textarea>
+                <a href="#"  th:href="@{myNotes/delete/} + ${note.id}" th:method="get" class="btn btn-primary">Delete</a>
+                <!--<a href="#"  th:href="@{/editNote/} + ${note.id}" th:method="put" class="btn btn-primary">Save</a>-->
+            </div>
         </div>
+    </div>
+</div>
 </body>
 </html>
