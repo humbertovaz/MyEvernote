@@ -41,7 +41,7 @@ class AuthenticationController(var userService : UserServiceImpl) {
     fun createAccount(@ModelAttribute("accountDTO") @Valid accountDTO: AccountDTO): ModelAndView {
         val modelAndView = ModelAndView()
         // save a single Customer
-        if(accountDTO.email!= null && accountDTO.password != null && accountDTO.password_repeat != null && userService.findByEmail(accountDTO.email) == null){
+        if(accountDTO.email!= null && accountDTO.password != null && accountDTO.password_repeat != null && accountDTO.password == accountDTO.password_repeat  && userService.findByEmail(accountDTO.email) == null){
             userService.save(User(null,accountDTO.username,accountDTO.email,null,accountDTO.password,null,null))
             modelAndView.viewName = "registersuccess"
             return modelAndView
