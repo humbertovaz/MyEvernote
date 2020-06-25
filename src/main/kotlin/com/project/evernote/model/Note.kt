@@ -14,7 +14,7 @@ class Note(
         val id: Long? = null,
         val date: Date? = null,
         val name : String? = null,
-        val description: String? = null,
+        var description: String? = null,
         @ManyToMany
         @JoinTable(name="note_user",
                 joinColumns = [JoinColumn(name="note_id", referencedColumnName = "id")],

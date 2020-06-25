@@ -42,8 +42,8 @@ class AuthenticationController(var userService : UserServiceImpl) {
         val modelAndView = ModelAndView()
         // save a single Customer
         if(accountDTO.email!= null && accountDTO.password != null && accountDTO.password_repeat != null && userService.findByEmail(accountDTO.email) == null){
-            userService.save(User(null,accountDTO.email,accountDTO.email,null,accountDTO.password,null,null))
-            modelAndView.viewName = "home"
+            userService.save(User(null,accountDTO.username,accountDTO.email,null,accountDTO.password,null,null))
+            modelAndView.viewName = "registersuccess"
             return modelAndView
         }
         modelAndView.viewName = "register"
@@ -51,8 +51,11 @@ class AuthenticationController(var userService : UserServiceImpl) {
     }
 
     @GetMapping("/home")
-    fun home (model: Model): ModelAndView {
+    fun home (model: Model, @AuthenticationPrincipal userDetails : UserDetails): ModelAndView {
         val modelAndView = ModelAndView()
+        val user = userService.findByEmail(userDetails.username)
+        if(user!=null)
+            modelAndView.addObject("greeting", "Hey "+ user.username + ", welcome back!")
         modelAndView.viewName = "home"
         return modelAndView
     }

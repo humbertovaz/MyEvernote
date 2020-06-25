@@ -28,4 +28,9 @@ class NoteService(val noteRepository: NoteRepository){
         var note = noteRepository.findById(id).get()
         return noteRepository.delete(note)
     }
+
+    fun findById(id: Long) : Note? {
+        return noteRepository.findById(id).get()
+
+    }
 }

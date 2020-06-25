@@ -25,6 +25,20 @@ class NoteController(var userService : UserServiceImpl,val noteService: NoteServ
         return modelAndView
     }
 
+    @PutMapping("/editNote/{id}")
+    fun edit(@RequestBody description : String?, @PathVariable id : Long, @AuthenticationPrincipal userDetails : UserDetails) : ModelAndView{
+        val user = userService.findByEmail(userDetails.username)
+        val modelAndView = ModelAndView()
+        val note = noteService.findById(id)
+        if (note!=null && description!=null && note.users != null && note.users.contains(user)){
+            note.description = description
+            noteService.noteRepository.save(note)
+        }
+        modelAndView.viewName = "redirect:/myNotes"
+        return modelAndView
+    }
+
+
     @GetMapping("/myNotes")
     fun mynotes (model: Model, @AuthenticationPrincipal userDetails : UserDetails): ModelAndView {
         val modelAndView = ModelAndView()
@@ -37,11 +51,16 @@ class NoteController(var userService : UserServiceImpl,val noteService: NoteServ
     }
 
     @GetMapping("/myNotes/delete/{id}")
-    fun deleteNote(@PathVariable id : Long) : ModelAndView{
+    fun deleteNote(@PathVariable id : Long, @AuthenticationPrincipal userDetails : UserDetails) : ModelAndView{
         val modelAndView = ModelAndView()
-        noteService.delete(id)
+        val user = userService.findByEmail(userDetails.username)
+        var note = noteService.findById(id)
+        if( note?.users != null && note.users!!.contains(user)){
+            noteService.delete(id)
+        }
         modelAndView.viewName = "redirect:/myNotes"
         return modelAndView
     }
+
 
 }
