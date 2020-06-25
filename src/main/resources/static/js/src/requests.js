@@ -7,7 +7,7 @@ $(function () {
         const myDescription = $('#'+id).val();
         const data =  myDescription;
         $.ajax({
-            type: "PUT",
+            type: "PATCH",
             url: url+id,
             data: data,
             contentType: 'application/json',

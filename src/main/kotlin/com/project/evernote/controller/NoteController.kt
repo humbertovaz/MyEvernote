@@ -25,7 +25,7 @@ class NoteController(var userService : UserServiceImpl,val noteService: NoteServ
         return modelAndView
     }
 
-    @PutMapping("/editNote/{id}")
+    @PatchMapping("/editNote/{id}")
     fun edit(@RequestBody description : String?, @PathVariable id : Long, @AuthenticationPrincipal userDetails : UserDetails) : ModelAndView{
         val user = userService.findByEmail(userDetails.username)
         val modelAndView = ModelAndView()
