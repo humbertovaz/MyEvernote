@@ -18,7 +18,6 @@ import java.util.*
 @Transactional
 class UserServiceImpl (val encoder: PasswordEncoder,val userRepository: UserRepository ) : UserService  {
 
-
     override fun save(user: User) {
         user.password = encoder.encode(user.password)
         userRepository.save(user)
@@ -31,14 +30,4 @@ class UserServiceImpl (val encoder: PasswordEncoder,val userRepository: UserRepo
     override fun findByEmail(email: String?): User? {
         return userRepository.findByEmail(email!!)
     }
-
-    @Throws(UsernameNotFoundException::class)
-    fun loadUserByUsername(s: String?): UserDetails? {
-        return org.springframework.security.core.userdetails.User("admin@a",
-                "$2a$10\$vs7veyVUaqeGyVlxXpp94O7BcmzcF2HGUmH2va6XDVCj2mK8uFzRi", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"))
-    }
-
-
-
-
 }

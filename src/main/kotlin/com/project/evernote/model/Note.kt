@@ -1,7 +1,6 @@
 package com.project.evernote.model
 
 import javax.persistence.*
-import javax.print.attribute.standard.DateTimeAtCreation
 import java.io.Serializable
 import java.util.*
 
