@@ -38,8 +38,14 @@
                 <h5 class="card-title" th:text="${note.name}">Note title</h5>
                 <p class="card-title" th:text="${note.date}"></p>
                 <textarea th:id="${note.id}" class="card-text" th:text="${note.description}"></textarea>
-                <a href="#"  th:href="@{myNotes/delete/} + ${note.id}" th:method="get" class="btn btn-primary">Delete</a>
-                <!--<a href="#"  th:href="@{/editNote/} + ${note.id}" th:method="put" class="btn btn-primary">Save</a>-->
+                <div class="btn-group" style="width:100%">
+                    <div class="btn btn-primary btn-block">
+                        <form action="#" th:action="@{'myNotes/delete/{id}'(id=${note.id})}"  method="post">
+                            <button class="btn btn-primary btn-block" type="submit" id="submitButton">Delete</button>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

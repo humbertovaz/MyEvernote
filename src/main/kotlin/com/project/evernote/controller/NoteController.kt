@@ -50,7 +50,7 @@ class NoteController(var userService : UserServiceImpl,val noteService: NoteServ
         return modelAndView
     }
 
-    @GetMapping("/myNotes/delete/{id}")
+    @PostMapping("/myNotes/delete/{id}")
     fun deleteNote(@PathVariable id : Long, @AuthenticationPrincipal userDetails : UserDetails) : ModelAndView{
         val modelAndView = ModelAndView()
         val user = userService.findByEmail(userDetails.username)
