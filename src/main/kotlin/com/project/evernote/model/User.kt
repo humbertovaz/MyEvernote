@@ -8,11 +8,11 @@ import javax.persistence.*
 class User(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        val id : Long? = null,
-        @Column(nullable = false,length = 10, unique = true)
-        val username : String? = null,
-        @Column(nullable = false,length = 10, unique = true)
-        val email: String? = null,
+        var id : Long? = null,
+        @Column(nullable = false,length = 255, unique = true)
+        var username : String? = null,
+        @Column(nullable = false,length = 255, unique = true)
+        var email: String? = null,
         val state: String? = null,
         @Column(nullable = false)
         var password : String? = null,

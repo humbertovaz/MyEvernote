@@ -17,10 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true, // (1)
-        securedEnabled = true, // (2)
-        jsr250Enabled = true) // (3)
 class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     @Autowired
@@ -63,28 +59,16 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     }
 
-
-
     @Autowired
     @Throws(java.lang.Exception::class)
     fun configureGlobalSecurity(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("user")
+                .withUser("test@test")
+                .password(encoder().encode("test"))
                 .roles("USER")
         auth.userDetailsService(customUserDetailsService)
-        auth.authenticationProvider(authenticationProvider())
     }
-
 
     @Bean
     fun encoder() : PasswordEncoder = BCryptPasswordEncoder(11)
-
-    @Bean
-    fun authenticationProvider(): DaoAuthenticationProvider? {
-        val authProvider = DaoAuthenticationProvider()
-        authProvider.setUserDetailsService(userDetailsService())
-        authProvider.setPasswordEncoder(encoder())
-        return authProvider
-    }
 }
